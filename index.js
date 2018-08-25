@@ -212,6 +212,12 @@ function compile (schema, opts) {
         flush()
         gen(`if (${ch('ptr')} !== 123) throw new Error("Cannot parse object")`)
       }
+      if (optional) {
+        flush()
+        gen(`if (${ch('ptr + 1')} === 125) {`)
+          ('ptr += 2')
+        gen('} else {')
+      }
 
       for (var j = 0; j < fields.length; j++) {
         const name = fields[j]
@@ -238,6 +244,8 @@ function compile (schema, opts) {
           gen('}')
         }
       }
+
+      if (optional) gen('}')
     }
 
     if (assign) {
