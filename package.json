@@ -1,0 +1,20 @@
+{
+  "name": "turbo-json-parse",
+  "version": "0.0.0",
+  "description": "Turbo charged JSON.parse for type stable JSON data",
+  "main": "index.js",
+  "dependencies": {
+    "generate-function": "^2.0.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mafintosh/turbo-json-parse.git"
+  },
+  "author": "Mathias Buus (@mafintosh)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mafintosh/turbo-json-parse/issues"
+  },
+  "homepage": "https://github.com/mafintosh/turbo-json-parse"
+}
