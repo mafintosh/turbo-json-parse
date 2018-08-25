@@ -89,8 +89,7 @@ function stringUnescape (s) {
 }
 
 function slowStringUnescape (s) {
-  console.log('her')
-  return JSON.parse('"' + s  + '"') // slow path but unlikely
+  return JSON.parse('"' + s + '"') // slow path but unlikely
 }
 
 function compile (schema, opts) {
@@ -120,7 +119,7 @@ function compile (schema, opts) {
 
   return gen.toFunction(constants)
 
-  function inc (n, abs) { 
+  function inc (n, abs) {
     if (abs) {
       absVar = abs
       incs = n
@@ -155,7 +154,7 @@ function compile (schema, opts) {
       const sep = j < fields.length - 1 ? ',' : ''
       const child = obj[name]
       if (isObject(child) && !optional) {
-        gen('%s: {',name)
+        gen('%s: {', name)
         defaultObj(child, Object.keys(child))
         gen('}%s', sep)
       } else if (Array.isArray(child) && !optional) {
@@ -196,8 +195,6 @@ function compile (schema, opts) {
   function compileObject (assign, obj, gen, parent) {
     const t = tmp()
     const f = tmp()
-    const i = tmp()
-    const colon = tmp()
     const fields = constants[f] = Object.keys(obj)
 
     if (parent) {
@@ -293,7 +290,7 @@ function compile (schema, opts) {
     flush()
     gen(`if (++ptr < s.length && ${ch('ptr')} !== 93) {`)
       ('do {')
-    
+
     compileType(val => t + '.push(' + val + ')', type, gen)
     flush()
 
@@ -338,7 +335,7 @@ function compile (schema, opts) {
     } else {
       gen(assign('s.slice(ptr, %s)'), t)
     }
-    inc(2, t) 
+    inc(2, t)
   }
 
   function endNumber (ptr) {
