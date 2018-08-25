@@ -108,7 +108,7 @@ function compile (schema, opts) {
   var absVar = ''
   var declaredPtr = false
 
-  const constants = {console, endNumber, indexOfString, indexOfKey, endNumberBuffer, endNumberString, stringUnescape}
+  const constants = {endNumber, indexOfString, indexOfKey, endNumberBuffer, endNumberString, stringUnescape}
   const gen = genfun()
 
   if (typeof schema !== 'object') throw new Error('Only object or array schemas supported')
@@ -218,7 +218,8 @@ function compile (schema, opts) {
         const type = obj[name]
         const parent = t + '.' + name
         const assign = val => parent + ' = ' + val
-        const offset = j === 0 ? 1 : 0
+        const offset = (!optional && j === 0) ? 1 : 0
+        if (j === 0 && optional) inc(1)
         if (optional) {
           flush()
           gen('if (%s) {', compareKey(f, fields, j, offset + 1, true))
