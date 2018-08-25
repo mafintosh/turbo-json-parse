@@ -6,13 +6,13 @@ const s = JSON.stringify(dave)
 const b = Buffer.from(s)
 
 const schema = compile.schema(dave)
-const parse = compile(schema, {optional: false, validate: false, unsafe: false, buffer: true})
+const parse = compile(schema, {optional: false, validate: false, unsafe: false, buffer: true, unescapeStrings: false})
 
-const parseNoBuf = compile(schema, {optional: false, validate: false, unsafe: false})
+const parseNoBuf = compile(schema, {optional: false, validate: false, unsafe: false, unescapeStrings: false})
 
 
 console.log('Generated code:')
-console.log(parseNoBuf.toString())
+console.log(parse.toString())
 console.log('One parse:')
 console.log(parse(s, b))
 

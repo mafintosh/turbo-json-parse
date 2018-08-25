@@ -50,7 +50,8 @@ Options include:
   optional: true, // set to false if all properties are required
   buffer: false, // set to true if have the underlying buffer of the string you wanna parse
   validate: true, // set to false to disable extra type validation
-  unsafe: false // set to true to enable unsafe optimizations
+  unsafe: false, // set to true to enable unsafe optimizations
+  unescapeStrings: true // set to false if you don't need to unescape \ chars
 }
 ```
 

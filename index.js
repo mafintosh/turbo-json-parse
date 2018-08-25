@@ -83,12 +83,23 @@ function bool (v, def) {
   return typeof v === 'boolean' ? v : def
 }
 
+function stringUnescape (s) {
+  if (s.indexOf('\\') === -1) return s
+  return slowStringUnescape(s)
+}
+
+function slowStringUnescape (s) {
+  console.log('her')
+  return JSON.parse('"' + s  + '"') // slow path but unlikely
+}
+
 function compile (schema, opts) {
   if (!opts) opts = {}
 
   const unsafe = bool(opts.unsafe, false)
   const validate = bool(opts.validate, !unsafe)
   const optional = bool(opts.optional, true)
+  const unescapeStrings = bool(opts.unescapeStrings, true)
   const validateKeys = bool(opts.validateKeys, !unsafe)
   const validateLength = bool(opts.validateLength, !unsafe)
   const buffer = !!opts.buffer
@@ -98,7 +109,7 @@ function compile (schema, opts) {
   var absVar = ''
   var declaredPtr = false
 
-  const constants = {console, endNumber, indexOfString, indexOfKey, endNumberBuffer, endNumberString}
+  const constants = {console, endNumber, indexOfString, indexOfKey, endNumberBuffer, endNumberString, stringUnescape}
   const gen = genfun()
 
   if (typeof schema !== 'object') throw new Error('Only object or array schemas supported')
@@ -322,7 +333,11 @@ function compile (schema, opts) {
       (`%s = ${idxOf(34, '%s + 1')}`, t, t)
     gen('}')
 
-    gen(assign('s.slice(ptr, %s)'), t)
+    if (unescapeStrings) {
+      gen(assign('stringUnescape(s.slice(ptr, %s))'), t)
+    } else {
+      gen(assign('s.slice(ptr, %s)'), t)
+    }
     inc(2, t) 
   }
 
