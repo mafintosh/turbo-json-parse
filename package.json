@@ -1,7 +1,7 @@
 {
   "name": "turbo-json-parse",
   "version": "1.0.0",
-  "description": "Turbo charged JSON.parse for type stable JSON data",
+  "description": "Turbocharged JSON.parse for type stable JSON data",
   "main": "index.js",
   "dependencies": {
     "generate-function": "^2.0.0"
