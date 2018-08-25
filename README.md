@@ -64,6 +64,10 @@ const data = parse(string, theBufferYouToStringed)
 
 This will speed up the parsing by 2-3x as well.
 
+#### `typeSchema = compile.schema(obj)`
+
+Generate a type schema from an existing object.
+
 ## Performance
 
 If your JSON data follows the heuristics described above this parser can be very fast.
