@@ -10,7 +10,7 @@ function def (type) {
       case 'number': return '0'
       case 'boolean':
       case 'bool': return 'false'
-      default: throw new Error('Not default type available')
+      default: throw new Error('No default type available')
     }
   }
   return 'undefined'
