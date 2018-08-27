@@ -1,38 +1,56 @@
-const compile = require('./')
+const compile = require('./index2')
 
-const dave = {"checked":true,"checker":false,"dimensions":{"height":10,"width":5},"id":1,"name":"A green door","price":12}
+const dave = {
+  checked: true,
+  checker: false,
+  dimensions: {
+    height: 10,
+    width: 5
+  },
+  id: 1,
+  name: 'A green door',
+  price: 12
+}
 
 const s = JSON.stringify(dave)
 const b = Buffer.from(s)
+const cnt = 1e7
 
-const schema = compile.schema(dave)
-const parse = compile(schema, {optional: false, validate: false, unsafe: false, buffer: true, unescapeStrings: false})
+for (let o = 0; o < 3; o++) {
+  const veryFast = o > 0
+  const safe = o < 2
+  const opts = {ordered: veryFast, required: veryFast, unescapeStrings: !veryFast, fullMatch: safe, validate: safe}
+  const parseNoBuf = compile(compile.inferRawSchema(dave, opts), opts)
+  const parse = compile(compile.inferRawSchema(dave, opts), Object.assign({}, opts, {buffer: true}))
 
-const parseNoBuf = compile(schema, {optional: false, validate: false, unsafe: false, unescapeStrings: false})
-
-
-console.log('Generated code:')
-console.log(parse.toString())
-console.log('One parse:')
-console.log(parse(s, b))
-
-const cnt = 3e7
-
-console.time('Benching turbo-json-parse with buffer')
-for (var i = 0; i < cnt; i++) {
-  parse(s, b)
+  if (o) console.log()
+  console.log('Compiling with', opts)
+  console.log('\nBenching from string\n')
+  for (let r = 0; r < 2; r++) {
+    console.log('Run ' + r)
+    console.time('Benching turbo-json-parse from string')
+    for (let i = 0; i < cnt; i++) {
+      parseNoBuf(s)
+    }
+    console.timeEnd('Benching turbo-json-parse from string')
+    console.time('Benching JSON.parse from string')
+    for (let i = 0; i < cnt; i++) {
+      JSON.parse(s)
+    }
+    console.timeEnd('Benching JSON.parse from string')
+  }
+  console.log('\nBenching from buffer\n')
+  for (let r = 0; r < 2; r++) {
+    console.log('Run ' + r)
+    console.time('Benching turbo-json-parse from buffer')
+    for (let i = 0; i < cnt; i++) {
+      parse(b)
+    }
+    console.timeEnd('Benching turbo-json-parse from buffer')
+    console.time('Benching JSON.parse from buffer')
+    for (let i = 0; i < cnt; i++) {
+      JSON.parse(b)
+    }
+    console.timeEnd('Benching JSON.parse from buffer')
+  }
 }
-console.timeEnd('Benching turbo-json-parse with buffer')
-
-console.time('Benching turbo-json-parse without buffer')
-for (var i = 0; i < cnt; i++) {
-  parseNoBuf(s)
-}
-console.timeEnd('Benching turbo-json-parse without buffer')
-
-
-console.time('Benching JSON.parse')
-for (var i = 0; i < cnt; i++) {
-  JSON.parse(s)
-}
-console.timeEnd('Benching JSON.parse')
