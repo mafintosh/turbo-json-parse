@@ -1,4 +1,4 @@
-const compile = require('./index2')
+const compile = require('./')
 
 const dave = {
   checked: true,
@@ -25,6 +25,7 @@ for (let o = 0; o < 3; o++) {
 
   if (o) console.log()
   console.log('Compiling with', opts)
+  console.log('One parse', parseNoBuf(s))
   console.log('\nBenching from string\n')
   for (let r = 0; r < 2; r++) {
     console.log('Run ' + r)

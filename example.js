@@ -1,11 +1,11 @@
 const compile = require('./')
 
 // pass in a type schema
-const parse = compile({
+const parse = compile.from({
   hello: 'string',
-  num: 'number',
-  flag: 'boolean',
-  flags: ['boolean'], // array of booleans
+  num: 42,
+  flag: true,
+  flags: [true],
   nested: {
     more: 'string'
   }
@@ -17,4 +17,3 @@ const ex = JSON.stringify({
 
 // will return {hello: 'world'}
 console.log(parse(ex))
-

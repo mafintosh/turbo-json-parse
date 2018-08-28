@@ -5,6 +5,11 @@ const ops = require('./lib/ops')
 
 exports = module.exports = compile
 exports.inferRawSchema = schema.inferRawSchema
+exports.from = from
+
+function from (obj, opts) {
+  return compile(schema.inferRawSchema(obj), opts)
+}
 
 function compile (rawSchema, opts) {
   if (!opts) opts = {}
@@ -14,6 +19,11 @@ function compile (rawSchema, opts) {
 
   const gen = genfun()
   gen.scope.console = console
+
+  // just to reserve these two symbols
+  gen.sym(name)
+  gen.sym('ptr')
+
   gen(`function parse (${name}, ptr) {`)
   gen('if (!ptr) ptr = 0')
   any(gen, null, rawSchema)
