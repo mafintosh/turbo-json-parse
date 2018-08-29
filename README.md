@@ -32,6 +32,7 @@ const parse = compile({
         more: {type: 'string'}
       }
     }
+  }
 })
 
 const ex = JSON.stringify({
