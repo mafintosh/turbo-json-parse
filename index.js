@@ -26,9 +26,11 @@ function compile (jsonSchema, opts) {
   const gen = genfun()
   gen.scope.console = console
 
-  // just to reserve these two symbols
+  // just to reserve these symbols
   gen.sym(name)
   gen.sym('ptr')
+  gen.sym('parseString')
+  gen.sym('parseNumber')
 
   gen(`function parse (${name}, ptr) {`)
   gen('if (!ptr) ptr = 0')
