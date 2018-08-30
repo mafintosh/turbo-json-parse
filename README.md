@@ -69,7 +69,7 @@ Options include:
 
 If you trust your input setting `unsafe` to `true` will gain you extra performance, at the cost of some important validation logic.
 
-If you have the underlying buffer, set `buffer` to true and pass the buffer instead of of the string to parse`
+If you have the underlying buffer, set `buffer` to true and pass the buffer instead of the string to parse
 
 ```js
 const parse = compile(..., {buffer: true})
