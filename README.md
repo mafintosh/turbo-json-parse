@@ -63,7 +63,8 @@ Options include:
   validate: true, // set to false to disable extra type validation
   fullMatch: true, // set to false to do fastest match based on the schema (unsafe!) 
   unsafe: false, // set to true to enable all unsafe optimizations
-  unescapeStrings: true // set to false if you don't need to unescape \ chars
+  unescapeStrings: true, // set to false if you don't need to unescape \ chars
+  defaults: true // set to false to disable setting of default properties
 }
 ```
 
