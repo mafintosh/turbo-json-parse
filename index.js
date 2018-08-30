@@ -37,5 +37,7 @@ function compile (jsonSchema, opts) {
   any(gen, null, rawSchema)
   gen('}')
 
-  return gen.toFunction()
+  const parse = gen.toFunction()
+  parse.pointer = 0
+  return parse
 }
