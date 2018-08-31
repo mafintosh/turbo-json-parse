@@ -97,6 +97,11 @@ You can actually view the source code of the generated parser by doing `parse.to
 This is much faster than parsing for a generic object, as the schema information helps the parser know what
 it is looking for, which is why this is faster to JSON.parse.
 
+## Related
+
+See [jitson](https://github.com/mafintosh/jitson) for a Just-In-Time JSON.parse compiler
+that uses this module when the incoming JSON is stable and falls back to JSON.parse when not.
+
 ## License
 
 MIT
