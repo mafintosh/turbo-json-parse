@@ -350,7 +350,74 @@ t.test('turbo-json-parse', t => {
       })
     })
 
+    t.test('object', t => {
+      t.test('protected keyword', t => {
+        const parser = tjp({
+          type: 'object',
+          properties: {
+            default: { type: 'string' }
+          }
+        })
+        t.deepEqual(parser('{"default":"value1"}'), { default: 'value1' })
+
+        t.end()
+      })
+    })
+
     t.end()
+  })
+
+  t.test('object', t => {
+    t.test('numeric property name', t => {
+      const parser = tjp({
+        type: 'object',
+        properties: {
+          42: { type: 'string' }
+        }
+      })
+      t.deepEqual(parser('{"42":"value1"}'), { 42: 'value1' })
+
+      t.end()
+    })
+  })
+
+  t.test('object', t => {
+    t.test('property name with whitespace', t => {
+      const parser = tjp({
+        type: 'object',
+        properties: {
+          // eslint-disable-next-line no-useless-computed-key
+          ['hello world']: {
+            type: 'object',
+            properties: {
+              key1: {
+                type: 'string'
+              }
+            }
+          }
+        }
+      })
+      const actual = parser('{"hello world":{"key1":"value1"}}')
+      // eslint-disable-next-line no-useless-computed-key
+      const expected = {['hello world']: {key1: 'value1'}}
+      t.deepEqual(actual, expected)
+
+      t.end()
+    })
+
+    t.test('property name with whitespace', t => {
+      const parser = tjp({
+        type: 'object',
+        properties: {
+          // eslint-disable-next-line no-useless-computed-key
+          ['hello world']: { type: 'string' }
+        }
+      })
+      // eslint-disable-next-line no-useless-computed-key
+      t.deepEqual(parser('{"hello world":"value1"}'), { ['hello world']: 'value1' })
+
+      t.end()
+    })
   })
 
   t.end()
