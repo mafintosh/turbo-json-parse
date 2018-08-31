@@ -1,6 +1,6 @@
 {
   "name": "turbo-json-parse",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Turbocharged JSON.parse for type stable JSON data",
   "main": "index.js",
   "dependencies": {
