@@ -355,10 +355,11 @@ t.test('turbo-json-parse', t => {
         const parser = tjp({
           type: 'object',
           properties: {
-            default: { type: 'string' }
+            default: { type: 'string' },
+            const: { type: 'string' }
           }
         })
-        t.deepEqual(parser('{"default":"value1"}'), { default: 'value1' })
+        t.deepEqual(parser('{"default":"value1","const":"value2"}'), { default: 'value1', const: 'value2' })
 
         t.end()
       })
