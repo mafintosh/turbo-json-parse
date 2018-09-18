@@ -421,5 +421,18 @@ t.test('turbo-json-parse', t => {
     })
   })
 
+  t.test('null', t => {
+    const parser = tjp({
+      type: 'object',
+      properties: {
+        key1: { type: 'null' }
+      }
+    })
+    t.deepEqual(parser('{"key1":null}'), {
+      key1: null
+    })
+    t.end()
+  })
+
   t.end()
 })
