@@ -4,6 +4,7 @@ const compile = require('./')
 const parse = compile.from({
   hello: 'string',
   num: 42,
+  null: null,
   flag: true,
   flags: [true],
   nested: {
