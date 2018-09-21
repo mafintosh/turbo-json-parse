@@ -65,6 +65,7 @@ Options include:
   unsafe: false, // set to true to enable all unsafe optimizations
   unescapeStrings: true, // set to false if you don't need to unescape \ chars
   defaults: true // set to false to disable setting of default properties
+  prettyPrinted: false // set to true to parse json formatted with JSON.stringify(x, null, 2)
 }
 ```
 
