@@ -79,7 +79,7 @@ const data = parse(buffer) // parse buffer instead of string
 
 This will speed up the parsing by 2-3x as well.
 
-#### `parse = compile.from(obj)`
+#### `parse = compile.from(obj, [options])`
 
 Generate a parser based on the type information from an existing object.
 
