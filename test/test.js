@@ -434,5 +434,23 @@ t.test('turbo-json-parse', t => {
     t.end()
   })
 
+  t.test('pretty print', t => {
+    const parser = tjp({
+      type: 'object',
+      properties: {
+        key1: { type: 'null' },
+        key2: { type: 'string' }
+      }
+    }, { prettyPrinted: true })
+    t.deepEqual(parser(JSON.stringify({
+      key1: null,
+      key2: 'test'
+    }, null, 2)), {
+      key1: null,
+      key2: 'test'
+    })
+    t.end()
+  })
+
   t.end()
 })
