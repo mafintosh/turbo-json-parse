@@ -452,5 +452,64 @@ t.test('turbo-json-parse', t => {
     t.end()
   })
 
+  t.test('arbitrary json', t => {
+    const parser = tjp({
+      type: 'object',
+      properties: {
+        key1: { type: 'null' },
+        key2: { type: 'arbitraryJSON' }
+      }
+    })
+    t.deepEqual(parser(JSON.stringify({
+      key1: null,
+      key2: {
+        test1: ['test'],
+        test2: {
+          monkey: 'dance'
+        }
+      }
+    })), {
+      key1: null,
+      key2: {
+        test1: ['test'],
+        test2: {
+          monkey: 'dance'
+        }
+      }
+    })
+    t.end()
+  })
+
+  t.test('arbitrary json 2', t => {
+    const parser = tjp({
+      type: 'object',
+      properties: {
+        key1: { type: 'null' },
+        key2: { type: 'arbitraryJSON' },
+        key3: { type: 'number' }
+      }
+    })
+    t.deepEqual(parser(JSON.stringify({
+      key1: null,
+      key2: {
+        test1: ['test'],
+        test2: {
+          monkey: 'dance'
+        }
+      },
+      key3: 1234
+    })), {
+      key1: null,
+      key2: {
+        test1: ['test'],
+        test2: {
+          monkey: 'dance'
+        }
+      },
+      key3: 1234
+    })
+    t.end()
+  })
+
   t.end()
 })
