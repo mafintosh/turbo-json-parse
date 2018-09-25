@@ -61,8 +61,8 @@ Options include:
   required: false, // set to true if all properties are required
   ordered: false, // set to true if your properties have the same order always
   validate: true, // set to false to disable extra type validation
+  validateStrings: true, // set to false to disable extra type validation
   fullMatch: true, // set to false to do fastest match based on the schema (unsafe!) 
-  unsafe: false, // set to true to enable all unsafe optimizations
   unescapeStrings: true, // set to false if you don't need to unescape \ chars
   defaults: true // set to false to disable setting of default properties
   prettyPrinted: false // set to true to parse json formatted with JSON.stringify(x, null, 2)
