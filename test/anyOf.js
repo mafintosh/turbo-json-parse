@@ -30,6 +30,51 @@ t.test('should parse anyOf string and null', t => {
   })
 })
 
+t.test('should parse nested anyOf string and null', t => {
+  t.plan(3)
+
+  const parser = tjp({
+    type: 'object',
+    properties: {
+      key1: {
+        anyOf: [
+          {
+            type: 'object',
+            properties: {
+              key2: {
+                anyOf: [
+                  {
+                    type: 'string'
+                  },
+                  {
+                    type: 'null'
+                  }
+                ]
+              }
+            }
+          },
+          {
+            type: 'boolean'
+          }
+        ]
+      }
+    }
+  })
+  t.deepEqual(parser('{"key1":{"key2":"string"}}'), {
+    key1: {
+      key2: 'string'
+    }
+  })
+  t.deepEqual(parser('{"key1":{"key2":null}}'), {
+    key1: {
+      key2: null
+    }
+  })
+  t.deepEqual(parser('{"key1":false}'), {
+    key1: false
+  })
+})
+
 t.test('should parse anyOf string, boolean or null', t => {
   t.plan(3)
 
