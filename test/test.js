@@ -452,5 +452,19 @@ t.test('turbo-json-parse', t => {
     t.end()
   })
 
+  t.test('large numbers with decimals', t => {
+    const parser = tjp({
+      type: 'object',
+      properties: {
+        key1: { type: 'number' }
+      }
+    })
+    t.deepEqual(parser('{"key1":1522826111450.0059}'), {
+      key1: 1522826111450.0059
+    })
+
+    t.end()
+  })
+
   t.end()
 })
