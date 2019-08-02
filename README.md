@@ -39,7 +39,7 @@ const ex = JSON.stringify({
   hello: 'world'
 })
 
-// will return {hello: 'world'}
+// will print {hello: 'world'}
 console.log(parse(ex))
 ```
 
