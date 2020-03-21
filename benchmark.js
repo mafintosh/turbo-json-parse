@@ -19,9 +19,18 @@ const cnt = 1e7
 for (let o = 0; o < 3; o++) {
   const veryFast = o > 0
   const safe = o < 2
-  const opts = {ordered: veryFast, required: veryFast, unescapeStrings: !veryFast, fullMatch: safe, validate: safe}
+  const opts = {
+    ordered: veryFast,
+    required: veryFast,
+    unescapeStrings: !veryFast,
+    fullMatch: safe,
+    validate: safe
+  }
   const parseNoBuf = compile(compile.inferRawSchema(dave, opts), opts)
-  const parse = compile(compile.inferRawSchema(dave, opts), Object.assign({}, opts, {buffer: true}))
+  const parse = compile(
+    compile.inferRawSchema(dave, opts),
+    Object.assign({}, opts, { buffer: true })
+  )
 
   if (o) console.log()
   console.log('Compiling with', opts)

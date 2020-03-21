@@ -8,11 +8,11 @@ exports.inferRawSchema = schema.inferRawSchema
 exports.jsonSchemaToRawSchema = schema.jsonSchemaToRawSchema
 exports.from = from
 
-function from (obj, opts) {
+function from(obj, opts) {
   return compile(schema.inferRawSchema(obj), opts)
 }
 
-function compile (jsonSchema, opts) {
+function compile(jsonSchema, opts) {
   if (!opts) opts = {}
 
   const isRawSchema = typeof jsonSchema.type === 'number'
@@ -34,6 +34,7 @@ function compile (jsonSchema, opts) {
 
   gen(`function parse (${name}, ptr) {`)
   gen('if (!ptr) ptr = 0')
+  gen(`let parsed_value;`)
   any(gen, null, rawSchema)
   gen('}')
 
