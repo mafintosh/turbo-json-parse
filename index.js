@@ -8,11 +8,11 @@ exports.inferRawSchema = schema.inferRawSchema
 exports.jsonSchemaToRawSchema = schema.jsonSchemaToRawSchema
 exports.from = from
 
-function from(obj, opts) {
+function from (obj, opts) {
   return compile(schema.inferRawSchema(obj), opts)
 }
 
-function compile(jsonSchema, opts) {
+function compile (jsonSchema, opts) {
   if (!opts) opts = {}
 
   const isRawSchema = typeof jsonSchema.type === 'number'
