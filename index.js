@@ -20,7 +20,7 @@ function compile (jsonSchema, opts) {
     ? jsonSchema
     : schema.jsonSchemaToRawSchema(jsonSchema)
 
-  const {name} = ops(opts)
+  const { name } = ops(opts)
   const any = anyDefaults(opts)
 
   const gen = genfun()
