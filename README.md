@@ -15,9 +15,6 @@ and is really fast assuming your JSON is type stable.
 const compile = require('turbo-json-parse')
 
 // Pass in a JSON schema
-// Note that only a subset of the schema is supported at the moment
-// including all of the type information, but excluding stuff like anyOf
-// PR welcome to expand to support :)
 
 const parse = compile({
   type: 'object',
@@ -30,6 +27,12 @@ const parse = compile({
       type: 'object',
       properties: {
         more: {type: 'string'}
+      }
+    },
+    maybeNull: {
+      anyOf: {
+        {type: 'string'},
+        {type: 'null'}
       }
     }
   }
